@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+<div class="container container-box mt-5 mb-5">
+
+    <a href="{% url 'get_started' %}" class="back-btn">← Orqaga</a>
+
+    <div class="row mt-4 g-4">
+
+        <div class="col-md-5">
+
+            <div style="margin-bottom:10px; font-size:18px; font-weight:600; color:#38bdf8;">
+                🏢 Kompaniya ish joyi
+            </div>
+
+            {% if vacancy.company_image %}
+                <img src="{{ vacancy.company_image.url }}" class="card-img" width="500" height="500">
+            {% else %}
+                <img src="https://avatars.mds.yandex.net/i?id=2286bd4d71fa9639828f652a28099a149c009ec1-5301271-images-thumbs&n=13"
+                     width="500">
+            {% endif %}
+
+        </div>
+
+        <div class="col-md-7">
+            <div class="card-detail">
+
+                <span class="badge-job">in demand</span>
+
+                <div class="title mt-2">
+                    {{ vacancy.title }}
+                </div>
+
+                <p class="text-secondary mt-2">
+                    📅 {{ vacancy.updated_at }}
+                </p>
+
+                <div class="section-title">💼 skills: {{ vacancy.skills }}</div>
+
+                <p>
+                    knowledges: {{ vacancy.knowledge }}
+                </p>
+
+                <div class="section-title">📝 requirements: {{ vacancy.requirements }}</div>
+
+                <p>
+                    We are looking for an experienced <b>"{{ vacancy.title }}"</b>
+                    hopefully we are hiring a person who knows these languages:
+                    <b>"{{ vacancy.known_languages }}"</b>
+                </p>
+
+                <p>
+                    work of experience: {{ vacancy.work_of_experience }}
+                </p>
+
+                <div class="section-title">📍 Location</div>
+                <p>
+                    address: {{ vacancy.location }}
+                </p>
+
+                <div class="section-title">💰 Salary monthly</div>
+                <p class="salary">
+                    $ {{ vacancy.salary }}
+                </p>
+
+                <div class="section-title">📱 contacts</div>
+                <p>
+                    {{ vacancy.contacts }}
+                </p>
+
+
+                <div class="d-flex gap-3">
+                    <form method="post"
+                          action="{% url 'job-delete' vacancy.pk %}"
+                          class="w-100"
+                          onsubmit="return confirm('Rostdan ham ushbu vakansiyani o‘chirmoqchimisiz?');">
+
+                        {% csrf_token %}
+                        {% if request.user.is_staff %}
+                            <button type="submit"
+                                    class="btn-main w-100"
+                                    style="background: linear-gradient(45deg, #ef4444, #dc2626); margin-top: 15px;">
+                                Delete Vacancy
+                            </button>
+                        {% endif %}
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock main %}

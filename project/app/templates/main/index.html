@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+<main>
+    <body>
+
+    <div class="bg one"></div>
+    <div class="bg two"></div>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{% url 'get_started' %}">JobFinder X</a>
+        </div>
+    </nav>
+
+
+    <section class="hero">
+        <div class="container">
+            <h1>Find <span class="gradient-text">Dream Jobs</span></h1>
+            <p class="text-secondary">Fast • Clean • Modern</p>
+
+            {% if request.user.is_staff %}
+                <div>
+                    <button class="btn btn-main"><a href="{% url 'add_vacancy' %}" style="color: white">PUBLISH NEW
+                        VACANCY</a></button>
+                </div>
+            {% endif %}
+
+            <div class="cat">
+                {% for category in categories %}
+                <a href="{% url 'get_job_by_category' category.id %}">
+                    <button>{{ category }}</button>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+    <div class="container mt-4">
+        <div class="row g-4">
+            {% for vacancy in vacancies %}
+            <div class="col-md-4">
+                <div class="card-job">
+                    <span class="badge">in demand</span>
+                    <h5 class="mt-2">{{ vacancy.title }}</h5>
+                    <p class="text-secondary">{{ vacancy.skills }}</p>
+
+                    <p class="updated">⏱ Created_at: {{ vacancy.created_at }}</p>
+
+                    <p>$ {{ vacancy.salary }}</p>
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'job_detail' vacancy.id %}" class="w-100">
+                            <button class="btn btn-main w-100">View</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+</main>
+{% endblock main %}

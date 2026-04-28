@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+<body>
+
+
+<section class="form-section">
+    <div class="container">
+        <div class="form-card">
+
+
+            <h2 class="gradient-text text-center mb-4">
+                <a href="{% url 'get_started' %}">MAIN MENU</a>
+            </h2>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+<!--                {{ form.non_field_errors }}-->
+
+                <div class="row g-4">
+
+                    <div class="col-md-6">
+                        <label>Job Title</label>
+                        <input type="text" name="title" value="{{ request.POST.title }}" class="form-control custom-input">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Category</label>
+                        <select name="category" class="form-control custom-input">
+                            {% for category in categories %}
+                            <option value="{{ category.id }}">
+                                {{ category }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Salary</label>
+                        <input type="number" name="salary" value="{{ request.POST.salary }}" class="form-control custom-input">
+                        {% if form.salary.errors %}
+                        <small style="color:red;">
+                            {{ form.salary.errors }}
+                        </small>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Experience</label>
+                        <input type="text" name="work_of_experience" value="{{ request.POST.work_of_experience }}" class="form-control custom-input">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label>Requirements</label>
+                        <textarea name="requirements" rows="4" class="form-control custom-input">{{ request.POST.requirements }}</textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label>Knowledge</label>
+                        <textarea name="knowledge" rows="3" class="form-control custom-input">{{ request.POST.knowledge }}</textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label>Known Languages</label>
+                        <textarea name="known_languages" rows="3" class="form-control custom-input">{{ request.POST.known_languages }}</textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label>Skills</label>
+                        <textarea name="skills" rows="3" class="form-control custom-input">{{ request.POST.skills }}</textarea>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Location</label>
+                        <input type="text" name="location" value="{{ request.POST.location }}" class="form-control custom-input">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Contacts</label>
+                        <input type="text" name="contacts" value="{{ request.POST.contacts }}" class="form-control custom-input">
+                        {% if form.contacts.errors %}
+                        <small style="color:red;">
+                            {{ form.contacts.errors }}
+                        </small>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label>Company Image</label>
+                        <input type="file" name="company_image" class="form-control custom-input">
+                    </div>
+                    {% if request.user.is_staff %}
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-main w-100 py-3">
+                            Publish Vacancy
+                        </button>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</section>
+
+</body>
+{% endblock main %}
+

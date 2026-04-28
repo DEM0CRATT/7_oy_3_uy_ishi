@@ -1,0 +1,108 @@
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background: #0b1220;
+        color: white;
+        min-height: 100vh;
+    }
+
+    .bg {
+        position: fixed;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(99,102,241,0.25), transparent 70%);
+        filter: blur(40px);
+        z-index: -1;
+    }
+
+    .bg.one {
+        top: -100px;
+        left: -100px;
+    }
+
+    .bg.two {
+        bottom: -120px;
+        right: -120px;
+        background: radial-gradient(circle, rgba(6,182,212,0.25), transparent 70%);
+    }
+
+    .navbar {
+        background: rgba(255,255,255,0.04);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .form-section {
+        padding: 120px 0 60px;
+    }
+
+    .form-card {
+        max-width: 900px;
+        margin: auto;
+        padding: 40px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+
+    .gradient-text {
+        background: linear-gradient(90deg,#6366f1,#06b6d4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+    }
+
+    .custom-input {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        color: white;
+        border-radius: 12px;
+        padding: 12px;
+    }
+
+    .custom-input:focus {
+        background: rgba(255,255,255,0.06);
+        border-color: #6366f1;
+        color: white;
+        box-shadow: 0 0 0 0.2rem rgba(99,102,241,0.25);
+    }
+
+    textarea.custom-input {
+        resize: none;
+    }
+
+    label {
+        margin-bottom: 8px;
+        color: #cbd5e1;
+        font-weight: 500;
+    }
+
+    .btn-main {
+        background: linear-gradient(90deg,#6366f1,#06b6d4);
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .btn-main:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(99,102,241,0.35);
+    }
+
+.custom-input {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        color: white;
+        border-radius: 12px;
+        padding: 12px;
+    }
+
+    .custom-input option {
+        background: #0b1220;
+        color: white;
+    }

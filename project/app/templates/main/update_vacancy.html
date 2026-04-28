@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+<body>
+
+<section class="form-section">
+    <div class="container">
+        <div class="form-card">
+            <a href="{% url 'job_detail' vacancy.pk %}" class="back-btn">← Orqaga</a>
+
+            <h2 class="gradient-text text-center mb-4">
+                <a href="{% url 'get_started' %}">MAIN MENU</a>
+            </h2>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row g-4">
+
+                    <div class="col-md-6">
+                        <label>Job Title</label>
+                        <input type="text" name="title" value="{{ vacancy.title }}" class="form-control custom-input">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Category</label>
+                        <select name="category" class="form-control custom-input">
+                            {% for category in categories %}
+                            <option value="{{ category.id }}">
+                                {{ category }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Salary</label>
+                        <input type="number" name="salary" value="{{ request.POST.salary|default:vacancy.salary }}"
+                               class="form-control custom-input">
+                        {% if form.salary.errors %}
+                        <small style="color:red;">
+                            {{ form.salary.errors }}
+                        </small>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Experience</label>
+                        <input type="text" name="work_of_experience" value="{{ vacancy.work_of_experience }}"
+                               class="form-control custom-input">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label>Requirements</label>
+                        <textarea name="requirements"
+                                  rows="4"
+                                  class="form-control custom-input">{{ vacancy.requirements }}</textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label>Knowledge</label>
+                        <textarea name="knowledge" rows="3"
+                                  class="form-control custom-input">{{ vacancy.knowledge }}</textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label>Known Languages</label>
+                        <textarea name="known_languages" rows="3" value="{{ vacancy.known_languages }}"
+                                  class="form-control custom-input">{{ vacancy.known_languages }}</textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label>Skills</label>
+                        <textarea name="skills" rows="3" value="{{ vacancy.skills }}"
+                                  class="form-control custom-input">{{ vacancy.skills }}</textarea>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Location</label>
+                        <input type="text" name="location" value="{{ vacancy.location }}"
+                               class="form-control custom-input">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Contacts</label>
+                        <input type="text" name="contacts" value="{{ request.POST.contacts|default:vacancy.contacts }}"
+                               class="form-control custom-input">
+                        {% if form.contacts.errors %}
+                        <small style="color:red;">
+                            {{ form.contacts.errors }}
+                        </small>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label>Company Image</label>
+                        <input type="file" name="company_image" class="form-control custom-input">
+                    </div>
+                    {% if request.user.is_staff %}
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-main w-100 py-3">
+                                Update Vacancy
+                            </button>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</section>
+
+</body>
+{% endblock main %}

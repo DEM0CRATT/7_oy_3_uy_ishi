@@ -1,0 +1,65 @@
+body {
+    background: #0f172a;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.container-box {
+    margin-top: 80px;
+}
+
+.card-detail {
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 30px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 30px rgba(0,0,0,0.4);
+}
+
+.job-img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.section-title {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #38bdf8;
+}
+
+.salary {
+    font-size: 24px;
+    font-weight: bold;
+    color: #22c55e;
+}
+
+.btn-main {
+    background: linear-gradient(45deg, #6366f1, #06b6d4);
+    border: none;
+    color: #fff;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.btn-main:hover {
+    opacity: 0.9;
+}
+
+.back-btn {
+    text-decoration: none;
+    color: #ccc;
+}
+
+.badge-job {
+    background: #22c55e;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+}
