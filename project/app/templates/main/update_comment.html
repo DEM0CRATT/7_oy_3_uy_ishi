@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+<form method="POST">
+    <div class="body-card mt-10">
+        {% csrf_token %}
+        {{ form.as_p }}
+    </div>
+    <button type="submit">
+        save
+    </button>
+</form>
+{% endblock main %}

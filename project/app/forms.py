@@ -49,13 +49,14 @@ class CategoryForm(forms.ModelForm):
 
 from django import forms
 
-class CommentForm(forms.Form):
-    comment = forms.CharField(
-        max_length=500,
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['comment']
         widget=forms.Textarea(attrs={
             'class': 'form-control',
-            'rows': 5,
+            'rows': 2,
             'placeholder': 'write comment'
         })
-    )
+
 

@@ -85,10 +85,40 @@
                         </a>
                     </button>
                     {% endif %}
+                </div>
+                <div class="card-body margin mt-5">
+                    <h3>Comments</h3>
 
+                    {% for comment in comments %}
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <p class="mb-0">{{ comment.comment }}</p>
+                            {% if comment.user.is_superuser or request.user == comment.user %}
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                <small style="font-size: 8pt">
+                                    <a href="{% url 'update_comment' comment.pk %}">
+                                        edit
+                                    </a>
+                                </small>
+                                <small style="font-size: 8pt">
+                                    <a href="{% url 'delete_comment' comment.pk %}">
+                                        delete
+                                    </a>
+                                </small>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="text-end">
+                            <p class="mb-0">{{ comment.user.username }}</p>
+                            <small style="font-size: 7pt">
+                                {{ comment.created_at }}
+                            </small>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
-            <form method="post">
+            <form method="post" action="{% url 'write_comment' vacancy.pk %}">
                 {% csrf_token %}
                 <p>{{ form.as_p }}</p>
                 <button type="submit">Send Comment</button>
