@@ -1,7 +1,7 @@
 from django import forms
 from django.db.models.fields import CharField
 
-from .models import Vacancies, Category, Comment
+from .models import Vacancies, Category, Comment, FavoriteJobs
 from django.core.validators import ValidationError
 
 class VacanciesForm(forms.ModelForm):
@@ -58,5 +58,8 @@ class CommentForm(forms.ModelForm):
             'rows': 2,
             'placeholder': 'write comment'
         })
+
+
+
 
 

@@ -56,7 +56,14 @@ class Comment(models.Model):
     # def __str__(self):
     #     return self.comment
 
+class FavoriteJobs(models.Model):
+    job = models.ForeignKey(Vacancies, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.user}, {self.job}'
+
+    
 
 
 

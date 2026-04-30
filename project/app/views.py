@@ -4,17 +4,24 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 
 
-from .models import Vacancies, Category, Comment
+from .models import Vacancies, Category, Comment, FavoriteJobs
 from .forms import VacanciesForm, CategoryForm, CommentForm
 
 def get_started(request: HttpRequest):
     vacancies = Vacancies.objects.all()
     categories = Category.objects.all()
+    if request.user.is_authenticated:
+        for vacancy in vacancies:
+            res = vacancy.favoritejobs_set.filter(user=request.user).exists()
+            if res:
+                vacancy.like = True
+            else:
+                vacancy.like = False
 
     context = {
         'vacancies': vacancies,
         'categories': categories,
-        'title': 'main menu'
+        'title': 'main menu',
     }
 
     return render(request, 'main/index.html', context)
@@ -144,6 +151,30 @@ def delete_comment(request: HttpRequest, comment_id: int):
         vacancy_id = comment.vacancy.id
         comment.delete()
         return redirect('job_detail', job_id=vacancy_id)
+
+@login_required(login_url='get_started')
+def add_favorite_vacancy(request: HttpRequest, vacancy_id: int):
+    vacancy = get_object_or_404(Vacancies, pk=vacancy_id)
+    favorite_vacancy, created = FavoriteJobs.objects.get_or_create(job=vacancy, user=request.user)
+    if not created:
+        favorite_vacancy.delete()
+    return redirect('get_started')
+
+@login_required(login_url='get_started')
+def get_to_the_favorites(request: HttpRequest):
+    if request.user.is_authenticated:
+        vacancies = FavoriteJobs.objects.filter(user=request.user)
+        categories = Category.objects.all()
+        title = 'my favorites'
+
+        context = {
+            'vacancies': vacancies,
+            'categories': categories,
+            'title': title,
+        }
+
+        return render(request, 'main/my_favorites.html', context)
+
 
 
 
